@@ -1,11 +1,18 @@
-import { program } from "commander";
+const express = require('express');
+const app = express();
 
-program
-  .version("1.0.0")
-  .description("My Node CLI")
-  .option("-n, --name <type>", "Add your name")
-  .action((option) => {
-    console.log(`Hello SALT Developer ${options.name}!`);
-  });
+app.use(express.static('public'));
 
-  program.parse(process.argv);
+app.get('/', (req, res) => {
+  const name = req.query.name;
+  if (name) {
+    res.send(`Hello SALT Developer ${name}`);
+  } else {
+    res.send('Please enter your name in the URL, for example: /?name=YourName');
+  }
+});
+
+const port = 3000
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
+});

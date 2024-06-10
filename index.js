@@ -1,18 +1,13 @@
-const express = require('express');
-const app = express();
+const { Command } = require("commander");
+const program = new Command();
 
-app.use(express.static('public'));
+program.version("1.0.0.").description("My own CLI");
 
-app.get('/', (req, res) => {
-  const name = req.query.name;
-  if (name) {
-    res.send(`Hello SALT Developer ${name}`);
-  } else {
-    res.send('Please enter your name in the URL, for example: /?name=YourName');
-  }
-});
+program
+  .command("Hello!")
+  .description("Respond with a greeting")
+  .action(() => {
+    console.log("Hello SALT Developer")
+  });
 
-const port = 3000
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
-});
+  program.parse(process.argv)

@@ -1,1 +1,11 @@
-console.log("Hello SALT developers!")
+import { program } from "commander";
+
+program
+  .version("1.0.0")
+  .description("My Node CLI")
+  .option("-n, --name <type>", "Add your name")
+  .action((option) => {
+    console.log(`Hello SALT Developer ${options.name}!`);
+  });
+
+  program.parse(process.argv);
